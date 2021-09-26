@@ -1,4 +1,4 @@
-import 'package:challenges_app/timer_challenge/utils/constants.dart';
+import 'package:challenges_app/app/modules/clock_timer/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/clock_positions.dart';

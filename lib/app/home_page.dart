@@ -1,8 +1,7 @@
-import 'package:challenges_app/components/challenge_item_widget.dart';
-import 'package:challenges_app/home_controller.dart';
-import 'package:challenges_app/timer_challenge/counter_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'shared/challenge_item_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +13,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  final HomeController _homeController = HomeController(page: CounterPage());
 
   @override
   void initState() {
@@ -74,13 +72,17 @@ class _HomePageState extends State<HomePage>
             child: ListView(
               children: [
                 ChallengeItemWidget(
-                    name: 'Timer Challenge',
-                    page: CounterPage(),
-                    controller: _homeController),
+                  name: 'Timer Challenge',
+                  route: '/clock_timer',
+                ),
                 ChallengeItemWidget(
-                    name: 'Container vazio',
-                    page: Container(),
-                    controller: _homeController),
+                  name: 'Container Vermelho',
+                  route: '/red_screen',
+                ),
+                ChallengeItemWidget(
+                  name: 'Container Azul',
+                  route: '/blue_screen',
+                ),
               ],
             ),
           ),
@@ -103,7 +105,6 @@ class _HomePageState extends State<HomePage>
                     color: Colors.white,
                     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 25),
                     child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -113,7 +114,7 @@ class _HomePageState extends State<HomePage>
                             ),
                           ],
                         ),
-                        Obx(() => _homeController.body.value)
+                        Expanded(child: RouterOutlet())
                       ],
                     ),
                   ),

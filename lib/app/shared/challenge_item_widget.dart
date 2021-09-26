@@ -1,22 +1,21 @@
-import 'package:challenges_app/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ChallengeItemWidget extends StatelessWidget {
   final String name;
-  final Widget page;
-  final HomeController controller;
-  const ChallengeItemWidget(
-      {Key? key,
-      required this.name,
-      required this.page,
-      required this.controller})
-      : super(key: key);
+  final String route;
+
+  const ChallengeItemWidget({
+    Key? key,
+    required this.name,
+    required this.route,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        controller.setBody(page);
+        Modular.to.navigate(route);
       },
       child: Container(
         padding: EdgeInsets.all(10),
