@@ -318,7 +318,7 @@ class _WatchWidgetState extends State<WatchWidget>
                       transform: Matrix4.rotationZ(oldQtdWalk + newValue),
                       child: Container(
                         color: Colors.black,
-                        width: (circleDiameter * 0.55),
+                        width: (circleDiameter * 0.50),
                         height: 1,
                       )),
                 );

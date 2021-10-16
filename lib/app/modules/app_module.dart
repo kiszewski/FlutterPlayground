@@ -20,15 +20,21 @@ class AppModule extends Module {
           '/',
           child: (_, __) => HomePage(),
           children: [
-            ChildRoute('/blue_screen',
+            ChildRoute('/blue_page',
                 child: (_, __) =>
                     Material(child: Container(color: Colors.blue))),
-            ChildRoute('/red_screen',
+            ChildRoute('/repositories_page',
                 child: (_, __) => Material(
                       child: GithubRepositoriesPage(),
                     )),
-            ModuleRoute('/clock_timer', module: ClockModule()),
+            ModuleRoute(
+              '/clock_timer',
+              module: ClockModule(),
+            ),
           ],
+        ),
+        WildcardRoute(
+          child: (_, __) => Material(child: Text('WildCard App Module')),
         )
       ];
 }

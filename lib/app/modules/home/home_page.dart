@@ -79,12 +79,12 @@ class _HomePageState extends State<HomePage>
                     route: '/clock_timer/',
                   ),
                   ChallengeItemWidget(
-                    name: 'Container Vermelho',
-                    route: '/red_screen',
+                    name: 'Repositórios Github',
+                    route: '/repositories_page',
                   ),
                   ChallengeItemWidget(
                     name: 'Container Azul',
-                    route: '/blue_screen',
+                    route: '/blue_page',
                   ),
                 ],
               ),

@@ -1,9 +1,9 @@
 import 'clock_positions.dart';
 
 const double pi = 3.1415926535897932;
-const halfPi = (pi / 2);
+const double halfPi = (pi / 2);
 
-Map<String, List<List>> numbersSequence = {
+const Map<String, List<List>> numbersSequence = {
   '0': [
     [
       ClockPositions.topLeftCorner,
