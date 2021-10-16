@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'shared/challenge_item_widget.dart';
+import '../../shared/challenge_item_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -68,22 +68,26 @@ class _HomePageState extends State<HomePage>
             color: Colors.blueAccent,
             width: width,
             height: height,
-            padding: EdgeInsets.symmetric(vertical: height / 3),
-            child: ListView(
-              children: [
-                ChallengeItemWidget(
-                  name: 'Timer Challenge',
-                  route: '/clock_timer',
-                ),
-                ChallengeItemWidget(
-                  name: 'Container Vermelho',
-                  route: '/red_screen',
-                ),
-                ChallengeItemWidget(
-                  name: 'Container Azul',
-                  route: '/blue_screen',
-                ),
-              ],
+            padding: EdgeInsets.symmetric(vertical: height / 3, horizontal: 15),
+            child: Container(
+              width: width * .03,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ChallengeItemWidget(
+                    name: 'Timer Challenge',
+                    route: '/clock_timer/',
+                  ),
+                  ChallengeItemWidget(
+                    name: 'Container Vermelho',
+                    route: '/red_screen',
+                  ),
+                  ChallengeItemWidget(
+                    name: 'Container Azul',
+                    route: '/blue_screen',
+                  ),
+                ],
+              ),
             ),
           ),
           GestureDetector(

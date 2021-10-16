@@ -13,15 +13,18 @@ class ChallengeItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return OutlinedButton(
+      style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all(Colors.transparent),
+        backgroundColor: MaterialStateProperty.all(Colors.yellow),
+        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+      ),
+      onPressed: () {
         Modular.to.navigate(route);
       },
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Row(
-          children: [Text(name)],
-        ),
+      child: Text(
+        name,
+        style: TextStyle(color: Colors.white),
       ),
     );
   }

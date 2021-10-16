@@ -14,7 +14,7 @@ class GreenPage extends StatelessWidget {
         children: [
           TextButton(
               onPressed: () async {
-                Modular.to.navigate('/clock_timer');
+                Modular.to.navigate('/clock_timer/');
               },
               child: Text('Voltar')),
           Container(
