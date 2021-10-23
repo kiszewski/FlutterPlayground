@@ -2,6 +2,7 @@ import 'package:challenges_app/app/modules/clock_timer/clock_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'arguments/arguments_module.dart';
 import 'gpl_consumer/github_repositories_page.dart';
 import 'gpl_consumer/gpl_client.dart';
 import 'home/home_page.dart';
@@ -30,6 +31,10 @@ class AppModule extends Module {
             ModuleRoute(
               '/clock_timer',
               module: ClockModule(),
+            ),
+            ModuleRoute(
+              '/arguments',
+              module: ArgumentsModule(),
             ),
           ],
         ),

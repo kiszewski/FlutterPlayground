@@ -86,6 +86,10 @@ class _HomePageState extends State<HomePage>
                     name: 'Container Azul',
                     route: '/blue_page',
                   ),
+                  ChallengeItemWidget(
+                    name: 'Arguments Test',
+                    route: '/arguments/',
+                  ),
                 ],
               ),
             ),
