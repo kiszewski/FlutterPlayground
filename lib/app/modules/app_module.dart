@@ -7,6 +7,7 @@ import 'gpl_consumer/github_repositories_page.dart';
 import 'gpl_consumer/gpl_client.dart';
 import 'home/home_page.dart';
 import 'clock_timer/controller/counter_store.dart';
+import 'outlet/outlet_module.dart';
 
 class AppModule extends Module {
   @override
@@ -21,7 +22,7 @@ class AppModule extends Module {
           '/',
           child: (_, __) => HomePage(),
           children: [
-            ChildRoute('/blue_page',
+            ChildRoute('/right_modal',
                 child: (_, __) =>
                     Material(child: Container(color: Colors.blue))),
             ChildRoute('/repositories_page',
@@ -35,6 +36,10 @@ class AppModule extends Module {
             ModuleRoute(
               '/arguments',
               module: ArgumentsModule(),
+            ),
+            ModuleRoute(
+              '/outlet',
+              module: OutletModule(),
             ),
           ],
         ),

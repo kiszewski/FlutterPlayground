@@ -90,6 +90,10 @@ class _HomePageState extends State<HomePage>
                     name: 'Arguments Test',
                     route: '/arguments/',
                   ),
+                  ChallengeItemWidget(
+                    name: 'Modal test',
+                    route: '/outlet/',
+                  ),
                 ],
               ),
             ),
