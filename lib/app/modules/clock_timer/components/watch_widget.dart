@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/clock_positions.dart';
 import '../utils/constants.dart';
+import 'dart:developer' as dev;
 
 class WatchWidget extends StatefulWidget {
   final ClockPositions initialPosition;
@@ -26,6 +27,7 @@ class _WatchWidgetState extends State<WatchWidget>
 
   @override
   void initState() {
+    dev.log('widget.initialPosition');
     controller = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
@@ -277,52 +279,90 @@ class _WatchWidgetState extends State<WatchWidget>
     final circleDiameter = 35.0;
 
     return Container(
-      color: Colors.white,
       height: circleDiameter,
       width: circleDiameter,
       child: Stack(
         children: [
-          AnimatedBuilder(
-              animation: controller,
-              builder: (_, child) {
-                double oldQtdWalk = piAlreadyWalked - qtdPiToWalk;
-                double diff = qtdPiToWalk;
+          Positioned(
+            bottom: circleDiameter * 0.5,
+            child: AnimatedBuilder(
+                animation: controller,
+                builder: (_, child) {
+                  double oldQtdWalk = piAlreadyWalked - qtdPiToWalk;
+                  double diff = qtdPiToWalk;
 
-                double newValue = (controller.value * diff).abs();
+                  double newValue = (controller.value * diff).abs();
 
-                return Positioned(
-                  bottom: circleDiameter * 0.50,
-                  left: circleDiameter * 0.50,
-                  child: Transform(
-                      transform: Matrix4.rotationZ(oldQtdWalk + newValue),
-                      child: Container(
-                        color: Colors.black,
-                        width: (circleDiameter * 0.55),
-                        height: 1,
-                      )),
-                );
-              }),
-          AnimatedBuilder(
-              animation: controller,
-              builder: (_, child) {
-                double oldQtdWalk =
-                    piAlreadyWalkedBiggerPointer - qtdPiToWalkBiggerPointer;
-                double diff = qtdPiToWalkBiggerPointer;
+                  return Transform.rotate(
+                    angle: oldQtdWalk + newValue,
+                    child: Container(
+                      width: circleDiameter,
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 5,
+                            child: Container(
+                              height: 1,
+                              color: Colors.transparent,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 4,
+                            child: Container(
+                              height: 1,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 1,
+                            child: Container(
+                              height: 1,
+                              color: Colors.transparent,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+          ),
+          Positioned(
+            bottom: circleDiameter * 0.5,
+            child: AnimatedBuilder(
+                animation: controller,
+                builder: (_, child) {
+                  double oldQtdWalk =
+                      piAlreadyWalkedBiggerPointer - qtdPiToWalkBiggerPointer;
+                  double diff = qtdPiToWalkBiggerPointer;
 
-                double newValue = (controller.value * diff).abs();
+                  double newValue = (controller.value * diff).abs();
 
-                return Positioned(
-                  bottom: circleDiameter * 0.49,
-                  left: circleDiameter * 0.49,
-                  child: Transform(
-                      transform: Matrix4.rotationZ(oldQtdWalk + newValue),
-                      child: Container(
-                        color: Colors.black,
-                        width: (circleDiameter * 0.50),
-                        height: 1,
-                      )),
-                );
-              }),
+                  return Transform.rotate(
+                    angle: oldQtdWalk + newValue,
+                    child: Container(
+                      width: circleDiameter,
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 5,
+                            child: Container(
+                              height: 1,
+                              color: Colors.transparent,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 5,
+                            child: Container(
+                              height: 1,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+          ),
           Center(
             child: Container(
               height: circleDiameter,

@@ -1,4 +1,6 @@
+import 'package:challenges_app/app/modules/clock_timer/components/watch_widget.dart';
 import 'package:challenges_app/app/modules/clock_timer/controller/counter_store.dart';
+import 'package:challenges_app/app/modules/clock_timer/utils/clock_positions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -24,7 +26,12 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('Criou CounterPage');
+    // return Center(
+    //   child: WatchWidget(
+    //       initialPosition: ClockPositions.off,
+    //       endPosition: ClockPositions.vertical),
+    // );
+
     return ListView(
       children: [
         Container(
