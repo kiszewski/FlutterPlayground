@@ -1,8 +1,6 @@
+import 'package:challenges_app/app/modules/clock_timer/utils/clock_positions.dart';
+import 'package:challenges_app/app/modules/clock_timer/utils/constants.dart';
 import 'package:flutter/material.dart';
-
-import '../utils/clock_positions.dart';
-import '../utils/constants.dart';
-import 'dart:developer' as dev;
 
 class WatchWidget extends StatefulWidget {
   final ClockPositions initialPosition;
@@ -27,7 +25,6 @@ class _WatchWidgetState extends State<WatchWidget>
 
   @override
   void initState() {
-    dev.log('widget.initialPosition');
     controller = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,

@@ -1,4 +1,6 @@
-import 'package:challenges_app/app/modules/clock_timer/components/watch_widget.dart';
+import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_store.dart';
+import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_widget.dart';
+import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_widget2.dart';
 import 'package:challenges_app/app/modules/clock_timer/controller/counter_store.dart';
 import 'package:challenges_app/app/modules/clock_timer/utils/clock_positions.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../components/number_widget.dart';
+import '../components/number/number_widget.dart';
 
 class CounterPage extends StatefulWidget {
   const CounterPage();
@@ -26,32 +28,70 @@ class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Center(
-    //   child: WatchWidget(
-    //       initialPosition: ClockPositions.off,
-    //       endPosition: ClockPositions.vertical),
+    // WatchStore store = WatchStore();
+
+    // return Column(
+    //   children: [
+    //     WatchWidget2(store: store),
+    //     // WatchWidget(
+    //     //   endPosition: ClockPositions.horizontal,
+    //     //   initialPosition: ClockPositions.vertical,
+    //     // ),
+    //     TextButton(
+    //         onPressed: () {
+    //           store.setStartPosition(ClockPositions.horizontal);
+    //           store.setEndPosition(ClockPositions.vertical);
+    //         },
+    //         child: Text('Mover relogio'))
+    //   ],
     // );
 
     return ListView(
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          child: Observer(
-              builder: (_) => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      NumberWidget(
-                        key: ObjectKey("${_controller.leftCounter}0"),
-                        number: _controller.leftCounter,
-                        previousNumber: _controller.previousLeftCounter,
-                      ),
-                      NumberWidget(
-                        key: ObjectKey(_controller.rightCounter),
-                        number: _controller.rightCounter,
-                        previousNumber: _controller.previousRightCounter,
-                      )
-                    ],
-                  )),
+          child: Column(
+            children: [
+              Observer(
+                builder: (_) => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NumberWidget(
+                      isLeft: false,
+                      // key: ObjectKey("${_controller.leftCounter}0"),
+                      // number: _controller.leftCounter,
+                      // previousNumber: _controller.previousLeftCounter,
+                    ),
+                    NumberWidget(
+                      isLeft: false,
+                      // key: ObjectKey(_controller.rightCounter),
+                      // number: _controller.rightCounter,
+                      // previousNumber: _controller.previousRightCounter,
+                    ),
+                  ],
+                ),
+              ),
+              Observer(
+                builder: (_) => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    NumberWidget(
+                      isLeft: false,
+                      // key: ObjectKey("${_controller.leftCounter}0"),
+                      // number: _controller.leftCounter,
+                      // previousNumber: _controller.previousLeftCounter,
+                    ),
+                    NumberWidget(
+                      isLeft: false,
+                      // key: ObjectKey(_controller.rightCounter),
+                      // number: _controller.rightCounter,
+                      // previousNumber: _controller.previousRightCounter,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         Container(
           padding: EdgeInsets.symmetric(
