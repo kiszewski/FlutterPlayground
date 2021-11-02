@@ -19,11 +19,11 @@ class _WatchWidget2State extends State<WatchWidget2>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
 
-  double piAlreadyWalkedBigger = 0;
-  double piAlreadyWalked = 0;
+  double diffSmallPointer = 0;
+  double diffBiggerPointer = 0;
 
-  double qtdPiToWalk = 0;
-  double qtdPiToWalkBiggerPointer = 0;
+  double startSmallPointer = 0;
+  double startBiggerPointer = 0;
 
   @override
   void initState() {
@@ -50,13 +50,12 @@ class _WatchWidget2State extends State<WatchWidget2>
   move() async {
     if (!controller.isAnimating) {
       controller.reset();
-      piAlreadyWalked = widget.store.piAlreadyWalked + widget.store.qtdPiToWalk;
 
-      piAlreadyWalkedBigger = widget.store.piAlreadyWalkedBiggerPointer +
-          widget.store.qtdPiToWalkBiggerPointer;
+      diffSmallPointer = widget.store.diffSmallPointer;
+      diffBiggerPointer = widget.store.diffBiggerPointer;
 
-      qtdPiToWalk = widget.store.qtdPiToWalk;
-      qtdPiToWalkBiggerPointer = widget.store.qtdPiToWalkBiggerPointer;
+      startSmallPointer = widget.store.startPosition.smallPointer;
+      startBiggerPointer = widget.store.startPosition.biggerPointer;
 
       await controller.forward();
     }
@@ -76,15 +75,9 @@ class _WatchWidget2State extends State<WatchWidget2>
             child: AnimatedBuilder(
                 animation: controller,
                 builder: (_, child) {
-                  double oldQtdWalk = piAlreadyWalked - qtdPiToWalk;
-                  double diff = qtdPiToWalk;
-
-                  double newValue = (controller.value * diff).abs();
-
-                  print('${controller.value} * $diff');
-
                   return Transform.rotate(
-                    angle: oldQtdWalk + newValue,
+                    angle: startSmallPointer +
+                        (controller.value * diffSmallPointer),
                     child: Container(
                       width: circleDiameter,
                       child: Row(
@@ -121,13 +114,9 @@ class _WatchWidget2State extends State<WatchWidget2>
             child: AnimatedBuilder(
                 animation: controller,
                 builder: (_, child) {
-                  double oldQtdWalk =
-                      piAlreadyWalkedBigger - qtdPiToWalkBiggerPointer;
-                  double diff = qtdPiToWalkBiggerPointer;
-                  double newValue = (controller.value * diff).abs();
-
                   return Transform.rotate(
-                    angle: oldQtdWalk + newValue,
+                    angle: startBiggerPointer +
+                        (controller.value * diffBiggerPointer),
                     child: Container(
                       width: circleDiameter,
                       child: Row(

@@ -39,7 +39,7 @@ class _CounterPageState extends State<CounterPage> {
     //     // ),
     //     TextButton(
     //         onPressed: () {
-    //           store.setStartPosition(ClockPositions.horizontal);
+    //           store.setStartPosition(ClockPositions.off);
     //           store.setEndPosition(ClockPositions.vertical);
     //         },
     //         child: Text('Mover relogio'))

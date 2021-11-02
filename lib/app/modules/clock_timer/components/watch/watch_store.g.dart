@@ -9,67 +9,34 @@ part of 'watch_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$WatchStore on _WatchStoreBase, Store {
-  final _$piAlreadyWalkedAtom = Atom(name: '_WatchStoreBase.piAlreadyWalked');
+  final _$diffSmallPointerAtom = Atom(name: '_WatchStoreBase.diffSmallPointer');
 
   @override
-  double get piAlreadyWalked {
-    _$piAlreadyWalkedAtom.reportRead();
-    return super.piAlreadyWalked;
+  double get diffSmallPointer {
+    _$diffSmallPointerAtom.reportRead();
+    return super.diffSmallPointer;
   }
 
   @override
-  set piAlreadyWalked(double value) {
-    _$piAlreadyWalkedAtom.reportWrite(value, super.piAlreadyWalked, () {
-      super.piAlreadyWalked = value;
+  set diffSmallPointer(double value) {
+    _$diffSmallPointerAtom.reportWrite(value, super.diffSmallPointer, () {
+      super.diffSmallPointer = value;
     });
   }
 
-  final _$qtdPiToWalkAtom = Atom(name: '_WatchStoreBase.qtdPiToWalk');
+  final _$diffBiggerPointerAtom =
+      Atom(name: '_WatchStoreBase.diffBiggerPointer');
 
   @override
-  double get qtdPiToWalk {
-    _$qtdPiToWalkAtom.reportRead();
-    return super.qtdPiToWalk;
+  double get diffBiggerPointer {
+    _$diffBiggerPointerAtom.reportRead();
+    return super.diffBiggerPointer;
   }
 
   @override
-  set qtdPiToWalk(double value) {
-    _$qtdPiToWalkAtom.reportWrite(value, super.qtdPiToWalk, () {
-      super.qtdPiToWalk = value;
-    });
-  }
-
-  final _$piAlreadyWalkedBiggerPointerAtom =
-      Atom(name: '_WatchStoreBase.piAlreadyWalkedBiggerPointer');
-
-  @override
-  double get piAlreadyWalkedBiggerPointer {
-    _$piAlreadyWalkedBiggerPointerAtom.reportRead();
-    return super.piAlreadyWalkedBiggerPointer;
-  }
-
-  @override
-  set piAlreadyWalkedBiggerPointer(double value) {
-    _$piAlreadyWalkedBiggerPointerAtom
-        .reportWrite(value, super.piAlreadyWalkedBiggerPointer, () {
-      super.piAlreadyWalkedBiggerPointer = value;
-    });
-  }
-
-  final _$qtdPiToWalkBiggerPointerAtom =
-      Atom(name: '_WatchStoreBase.qtdPiToWalkBiggerPointer');
-
-  @override
-  double get qtdPiToWalkBiggerPointer {
-    _$qtdPiToWalkBiggerPointerAtom.reportRead();
-    return super.qtdPiToWalkBiggerPointer;
-  }
-
-  @override
-  set qtdPiToWalkBiggerPointer(double value) {
-    _$qtdPiToWalkBiggerPointerAtom
-        .reportWrite(value, super.qtdPiToWalkBiggerPointer, () {
-      super.qtdPiToWalkBiggerPointer = value;
+  set diffBiggerPointer(double value) {
+    _$diffBiggerPointerAtom.reportWrite(value, super.diffBiggerPointer, () {
+      super.diffBiggerPointer = value;
     });
   }
 
@@ -118,110 +85,11 @@ mixin _$WatchStore on _WatchStoreBase, Store {
   }
 
   @override
-  dynamic setEndPosition(ClockPositions value) {
+  dynamic setEndPosition(ClockPositions end) {
     final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
         name: '_WatchStoreBase.setEndPosition');
     try {
-      return super.setEndPosition(value);
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveHalfQuarter() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveHalfQuarter');
-    try {
-      return super.moveHalfQuarter();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveOneQuarter() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveOneQuarter');
-    try {
-      return super.moveOneQuarter();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveTwoQuarter() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveTwoQuarter');
-    try {
-      return super.moveTwoQuarter();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveThreeQuarter() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveThreeQuarter');
-    try {
-      return super.moveThreeQuarter();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveHalfQuarterBiggerPointer() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveHalfQuarterBiggerPointer');
-    try {
-      return super.moveHalfQuarterBiggerPointer();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveOneQuarterBiggerPointer() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveOneQuarterBiggerPointer');
-    try {
-      return super.moveOneQuarterBiggerPointer();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveTwoQuarterBiggerPointer() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveTwoQuarterBiggerPointer');
-    try {
-      return super.moveTwoQuarterBiggerPointer();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic moveThreeQuarterBiggerPointer() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.moveThreeQuarterBiggerPointer');
-    try {
-      return super.moveThreeQuarterBiggerPointer();
-    } finally {
-      _$_WatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic calculate() {
-    final _$actionInfo = _$_WatchStoreBaseActionController.startAction(
-        name: '_WatchStoreBase.calculate');
-    try {
-      return super.calculate();
+      return super.setEndPosition(end);
     } finally {
       _$_WatchStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -230,10 +98,8 @@ mixin _$WatchStore on _WatchStoreBase, Store {
   @override
   String toString() {
     return '''
-piAlreadyWalked: ${piAlreadyWalked},
-qtdPiToWalk: ${qtdPiToWalk},
-piAlreadyWalkedBiggerPointer: ${piAlreadyWalkedBiggerPointer},
-qtdPiToWalkBiggerPointer: ${qtdPiToWalkBiggerPointer},
+diffSmallPointer: ${diffSmallPointer},
+diffBiggerPointer: ${diffBiggerPointer},
 startPosition: ${startPosition},
 endPosition: ${endPosition}
     ''';
