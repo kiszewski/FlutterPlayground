@@ -9,61 +9,62 @@ part of 'counter_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CounterStore on _CounterStoreBase, Store {
-  Computed<String>? _$_textCounterComputed;
+  Computed<String>? _$minuteComputed;
 
   @override
-  String get _textCounter =>
-      (_$_textCounterComputed ??= Computed<String>(() => super._textCounter,
-              name: '_CounterStoreBase._textCounter'))
+  String get minute =>
+      (_$minuteComputed ??= Computed<String>(() => super.minute,
+              name: '_CounterStoreBase.minute'))
           .value;
-  Computed<String>? _$rightCounterComputed;
+  Computed<String>? _$secondComputed;
 
   @override
-  String get rightCounter =>
-      (_$rightCounterComputed ??= Computed<String>(() => super.rightCounter,
-              name: '_CounterStoreBase.rightCounter'))
+  String get second =>
+      (_$secondComputed ??= Computed<String>(() => super.second,
+              name: '_CounterStoreBase.second'))
           .value;
-  Computed<String>? _$leftCounterComputed;
+  Computed<String>? _$previousMinuteComputed;
 
   @override
-  String get leftCounter =>
-      (_$leftCounterComputed ??= Computed<String>(() => super.leftCounter,
-              name: '_CounterStoreBase.leftCounter'))
+  String get previousMinute =>
+      (_$previousMinuteComputed ??= Computed<String>(() => super.previousMinute,
+              name: '_CounterStoreBase.previousMinute'))
           .value;
-  Computed<String>? _$_previousTextCounterComputed;
+  Computed<String>? _$previousSecondComputed;
 
   @override
-  String get _previousTextCounter => (_$_previousTextCounterComputed ??=
-          Computed<String>(() => super._previousTextCounter,
-              name: '_CounterStoreBase._previousTextCounter'))
-      .value;
-  Computed<String>? _$previousRightCounterComputed;
+  String get previousSecond =>
+      (_$previousSecondComputed ??= Computed<String>(() => super.previousSecond,
+              name: '_CounterStoreBase.previousSecond'))
+          .value;
+
+  final _$_minutesAtom = Atom(name: '_CounterStoreBase._minutes');
 
   @override
-  String get previousRightCounter => (_$previousRightCounterComputed ??=
-          Computed<String>(() => super.previousRightCounter,
-              name: '_CounterStoreBase.previousRightCounter'))
-      .value;
-  Computed<String>? _$previousLeftCounterComputed;
-
-  @override
-  String get previousLeftCounter => (_$previousLeftCounterComputed ??=
-          Computed<String>(() => super.previousLeftCounter,
-              name: '_CounterStoreBase.previousLeftCounter'))
-      .value;
-
-  final _$counterAtom = Atom(name: '_CounterStoreBase.counter');
-
-  @override
-  int get counter {
-    _$counterAtom.reportRead();
-    return super.counter;
+  int get _minutes {
+    _$_minutesAtom.reportRead();
+    return super._minutes;
   }
 
   @override
-  set counter(int value) {
-    _$counterAtom.reportWrite(value, super.counter, () {
-      super.counter = value;
+  set _minutes(int value) {
+    _$_minutesAtom.reportWrite(value, super._minutes, () {
+      super._minutes = value;
+    });
+  }
+
+  final _$_secondsAtom = Atom(name: '_CounterStoreBase._seconds');
+
+  @override
+  int get _seconds {
+    _$_secondsAtom.reportRead();
+    return super._seconds;
+  }
+
+  @override
+  set _seconds(int value) {
+    _$_secondsAtom.reportWrite(value, super._seconds, () {
+      super._seconds = value;
     });
   }
 
@@ -82,21 +83,6 @@ mixin _$CounterStore on _CounterStoreBase, Store {
     });
   }
 
-  final _$isDecreasingAtom = Atom(name: '_CounterStoreBase.isDecreasing');
-
-  @override
-  bool get isDecreasing {
-    _$isDecreasingAtom.reportRead();
-    return super.isDecreasing;
-  }
-
-  @override
-  set isDecreasing(bool value) {
-    _$isDecreasingAtom.reportWrite(value, super.isDecreasing, () {
-      super.isDecreasing = value;
-    });
-  }
-
   final _$decrementAsyncAction = AsyncAction('_CounterStoreBase.decrement');
 
   @override
@@ -108,11 +94,22 @@ mixin _$CounterStore on _CounterStoreBase, Store {
       ActionController(name: '_CounterStoreBase');
 
   @override
-  dynamic setCounter(int value) {
+  dynamic setMinutes(int value) {
     final _$actionInfo = _$_CounterStoreBaseActionController.startAction(
-        name: '_CounterStoreBase.setCounter');
+        name: '_CounterStoreBase.setMinutes');
     try {
-      return super.setCounter(value);
+      return super.setMinutes(value);
+    } finally {
+      _$_CounterStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSeconds(int value) {
+    final _$actionInfo = _$_CounterStoreBaseActionController.startAction(
+        name: '_CounterStoreBase.setSeconds');
+    try {
+      return super.setSeconds(value);
     } finally {
       _$_CounterStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -130,26 +127,13 @@ mixin _$CounterStore on _CounterStoreBase, Store {
   }
 
   @override
-  dynamic _setIsDecreasing(bool value) {
-    final _$actionInfo = _$_CounterStoreBaseActionController.startAction(
-        name: '_CounterStoreBase._setIsDecreasing');
-    try {
-      return super._setIsDecreasing(value);
-    } finally {
-      _$_CounterStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-counter: ${counter},
 formCounter: ${formCounter},
-isDecreasing: ${isDecreasing},
-rightCounter: ${rightCounter},
-leftCounter: ${leftCounter},
-previousRightCounter: ${previousRightCounter},
-previousLeftCounter: ${previousLeftCounter}
+minute: ${minute},
+second: ${second},
+previousMinute: ${previousMinute},
+previousSecond: ${previousSecond}
     ''';
   }
 }

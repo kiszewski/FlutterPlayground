@@ -1,8 +1,4 @@
-import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_store.dart';
-import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_widget.dart';
-import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_widget2.dart';
 import 'package:challenges_app/app/modules/clock_timer/controller/counter_store.dart';
-import 'package:challenges_app/app/modules/clock_timer/utils/clock_positions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -17,107 +13,85 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> {
-  late final CounterStore _controller;
+  late final CounterStore store;
+
+  final minutesInput = TextEditingController();
+  final secondsInput = TextEditingController();
 
   @override
   void initState() {
-    _controller = Modular.get();
-    _controller.decrement();
+    store = Modular.get();
+    store.decrement();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // WatchStore store = WatchStore();
-
-    // return Column(
-    //   children: [
-    //     WatchWidget2(store: store),
-    //     // WatchWidget(
-    //     //   endPosition: ClockPositions.horizontal,
-    //     //   initialPosition: ClockPositions.vertical,
-    //     // ),
-    //     TextButton(
-    //         onPressed: () {
-    //           store.setStartPosition(ClockPositions.off);
-    //           store.setEndPosition(ClockPositions.vertical);
-    //         },
-    //         child: Text('Mover relogio'))
-    //   ],
-    // );
-
     return ListView(
+      shrinkWrap: true,
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Observer(
-                builder: (_) => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    NumberWidget(
-                      isLeft: false,
-                      // key: ObjectKey("${_controller.leftCounter}0"),
-                      // number: _controller.leftCounter,
-                      // previousNumber: _controller.previousLeftCounter,
-                    ),
-                    NumberWidget(
-                      isLeft: false,
-                      // key: ObjectKey(_controller.rightCounter),
-                      // number: _controller.rightCounter,
-                      // previousNumber: _controller.previousRightCounter,
-                    ),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  NumberWidget(isLeft: true, isMinute: true),
+                  NumberWidget(isLeft: false, isMinute: true),
+                ],
               ),
-              Observer(
-                builder: (_) => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    NumberWidget(
-                      isLeft: false,
-                      // key: ObjectKey("${_controller.leftCounter}0"),
-                      // number: _controller.leftCounter,
-                      // previousNumber: _controller.previousLeftCounter,
-                    ),
-                    NumberWidget(
-                      isLeft: false,
-                      // key: ObjectKey(_controller.rightCounter),
-                      // number: _controller.rightCounter,
-                      // previousNumber: _controller.previousRightCounter,
-                    ),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  NumberWidget(isLeft: true, isMinute: false),
+                  NumberWidget(isLeft: false, isMinute: false),
+                ],
               ),
             ],
           ),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * .2),
-          child: TextField(
-            inputFormatters: [],
-            keyboardType: TextInputType.number,
-            maxLength: 2,
-            decoration: InputDecoration(hintText: '99'),
-            onChanged: _controller.setFormCounter,
-          ),
+        Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * .2),
+              child: TextField(
+                inputFormatters: [],
+                controller: minutesInput,
+                keyboardType: TextInputType.number,
+                maxLength: 2,
+                decoration: InputDecoration(hintText: '00'),
+                // onChanged: store.setFormCounter,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * .2),
+              child: TextField(
+                controller: secondsInput,
+                inputFormatters: [],
+                keyboardType: TextInputType.number,
+                maxLength: 2,
+                decoration: InputDecoration(hintText: '00'),
+                // onChanged: store.setFormCounter,
+              ),
+            ),
+          ],
         ),
-        Observer(
-          builder: (_) => _controller.isDecreasing
-              ? TextButton(
-                  onPressed: () {
-                    _controller.stopCounter();
-                  },
-                  child: Text('Stop'))
-              : TextButton(
-                  onPressed: () {
-                    _controller.setCounter(int.parse(_controller.formCounter));
-                    _controller.decrement();
-                  },
-                  child: Text('Decrement')),
-        ),
+        store.isDecreasing
+            ? TextButton(
+                onPressed: () {
+                  store.stopCounter();
+                },
+                child: Text('Stop'))
+            : TextButton(
+                onPressed: () {
+                  store.setMinutes(int.parse(minutesInput.text));
+                  store.setSeconds(int.parse(secondsInput.text));
+                  store.decrement();
+                },
+                child: Text('Decrement')),
         TextButton(
             onPressed: () {
               Modular.to.pushNamed('./green');

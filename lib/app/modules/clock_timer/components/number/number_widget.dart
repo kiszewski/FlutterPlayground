@@ -1,10 +1,8 @@
 import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_store.dart';
-import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_widget.dart';
 import 'package:challenges_app/app/modules/clock_timer/components/watch/watch_widget2.dart';
 import 'package:challenges_app/app/modules/clock_timer/controller/counter_store.dart';
 import 'package:challenges_app/app/modules/clock_timer/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -13,10 +11,12 @@ import '../watch/watch_widget2.dart';
 
 class NumberWidget extends StatefulWidget {
   final bool isLeft;
+  final bool isMinute;
 
   const NumberWidget({
     Key? key,
     required this.isLeft,
+    required this.isMinute,
   }) : super(key: key);
 
   @override
@@ -25,18 +25,31 @@ class NumberWidget extends StatefulWidget {
 
 class _NumberWidgetState extends State<NumberWidget> {
   final CounterStore store = Modular.get();
-  List<Map<String, dynamic>> gridWatches = [];
 
+  late String number;
+  late String previousNumber;
+
+  List<Map<String, dynamic>> gridWatches = [];
   @override
   void initState() {
-    for (int i = 0;
-        i <
-            numbersSequence[
-                    widget.isLeft ? store.leftCounter : store.rightCounter]!
-                .length;
-        i++) {
-      List row = numbersSequence[
-          widget.isLeft ? store.leftCounter : store.rightCounter]![i];
+    number = widget.isMinute
+        ? widget.isLeft
+            ? store.minute[0]
+            : store.minute[1]
+        : widget.isLeft
+            ? store.second[0]
+            : store.second[1];
+
+    previousNumber = widget.isMinute
+        ? widget.isLeft
+            ? store.previousMinute[0]
+            : store.previousMinute[1]
+        : widget.isLeft
+            ? store.previousSecond[0]
+            : store.previousSecond[1];
+
+    for (int i = 0; i < numbersSequence[number]!.length; i++) {
+      List row = numbersSequence[number]![i];
 
       for (int f = 0; f < row.length; f++) {
         final watchStore = WatchStore();
@@ -48,26 +61,36 @@ class _NumberWidgetState extends State<NumberWidget> {
     }
 
     autorun((_) {
-      store.leftCounter;
-      store.rightCounter;
+      final minute = store.minute;
+      final second = store.second;
+      final previousMinute = store.previousMinute;
+      final previousSecond = store.previousSecond;
+
+      number = widget.isMinute
+          ? widget.isLeft
+              ? minute[0]
+              : minute[1]
+          : widget.isLeft
+              ? second[0]
+              : second[1];
+
+      previousNumber = widget.isMinute
+          ? widget.isLeft
+              ? previousMinute[0]
+              : previousMinute[1]
+          : widget.isLeft
+              ? previousSecond[0]
+              : previousSecond[1];
 
       int index = 0;
 
-      for (int i = 0;
-          i <
-              numbersSequence[
-                      widget.isLeft ? store.leftCounter : store.rightCounter]!
-                  .length;
-          i++) {
-        List row = numbersSequence[
-            widget.isLeft ? store.leftCounter : store.rightCounter]![i];
+      for (int i = 0; i < numbersSequence[number]!.length; i++) {
+        List row = numbersSequence[number]![i];
 
         for (int f = 0; f < row.length; f++) {
-          ClockPositions position = numbersSequence[
-              widget.isLeft ? store.leftCounter : store.rightCounter]![i][f];
-          ClockPositions oldPosition = numbersSequence[widget.isLeft
-              ? store.previousLeftCounter
-              : store.previousRightCounter]![i][f];
+          ClockPositions position = numbersSequence[number]![i][f];
+
+          ClockPositions oldPosition = numbersSequence[previousNumber]![i][f];
 
           final watchStore = gridWatches[index]['store'] as WatchStore;
 
@@ -89,7 +112,6 @@ class _NumberWidgetState extends State<NumberWidget> {
       child: Wrap(
         children:
             gridWatches.map((element) => element['widget'] as Widget).toList(),
-        // key: ObjectKey(DateTime.now().millisecond),
       ),
     );
   }

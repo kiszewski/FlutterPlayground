@@ -12,6 +12,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawerEnableOpenDragGesture: false,
       endDrawer: Container(
         width: 500,
         child: Drawer(
