@@ -31,9 +31,19 @@ abstract class _CounterStoreBase with Store {
   @action
   Future decrement() async {
     _timer = Timer.periodic(Duration(seconds: 1), (_timer) {
+      if (_minutes > 9) {
+        previousMinute = _minutes.toString();
+      } else {
+        previousMinute = '0$_minutes';
+      }
       if (_seconds == 0) {
         setSeconds(59);
         if (_minutes != 0) {
+          if (_minutes > 9) {
+            previousMinute = _minutes.toString();
+          } else {
+            previousMinute = '0$_minutes';
+          }
           setMinutes(_minutes - 1);
         } else {
           _timer.cancel();
@@ -62,16 +72,8 @@ abstract class _CounterStoreBase with Store {
     }
   }
 
-  @computed
-  String get previousMinute {
-    final int previousMin = _seconds == 00 ? _minutes + 1 : _minutes;
-
-    if (previousMin + 1 > 9) {
-      return previousMin.toString();
-    } else {
-      return '0$previousMin';
-    }
-  }
+  @observable
+  String previousMinute = '00';
 
   @computed
   String get previousSecond {
@@ -84,7 +86,10 @@ abstract class _CounterStoreBase with Store {
     }
   }
 
+  @action
   stopCounter() {
     _timer.cancel();
+    _seconds = 0;
+    _minutes = 0;
   }
 }

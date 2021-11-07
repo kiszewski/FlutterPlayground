@@ -12,9 +12,11 @@ import '../watch/watch_widget2.dart';
 class NumberWidget extends StatefulWidget {
   final bool isLeft;
   final bool isMinute;
+  final Color color;
 
   const NumberWidget({
     Key? key,
+    this.color = Colors.white,
     required this.isLeft,
     required this.isMinute,
   }) : super(key: key);
@@ -107,8 +109,9 @@ class _NumberWidgetState extends State<NumberWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 350,
+      alignment: Alignment.center,
+      color: widget.color,
+      width: MediaQuery.of(context).size.width / 2,
       child: Wrap(
         children:
             gridWatches.map((element) => element['widget'] as Widget).toList(),

@@ -33,9 +33,10 @@ class _CounterPageState extends State<CounterPage> {
         Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   NumberWidget(isLeft: true, isMinute: true),
                   NumberWidget(isLeft: false, isMinute: true),
@@ -92,11 +93,14 @@ class _CounterPageState extends State<CounterPage> {
                   store.decrement();
                 },
                 child: Text('Decrement')),
-        TextButton(
-            onPressed: () {
-              Modular.to.pushNamed('./green');
-            },
-            child: Text('Go to green screen'))
+        Observer(builder: (_) {
+          store.second;
+          return TextButton(
+              onPressed: () {
+                Modular.to.pushNamed('./green');
+              },
+              child: Text('Go to green screen'));
+        })
       ],
     );
   }

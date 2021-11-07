@@ -23,13 +23,6 @@ mixin _$CounterStore on _CounterStoreBase, Store {
       (_$secondComputed ??= Computed<String>(() => super.second,
               name: '_CounterStoreBase.second'))
           .value;
-  Computed<String>? _$previousMinuteComputed;
-
-  @override
-  String get previousMinute =>
-      (_$previousMinuteComputed ??= Computed<String>(() => super.previousMinute,
-              name: '_CounterStoreBase.previousMinute'))
-          .value;
   Computed<String>? _$previousSecondComputed;
 
   @override
@@ -83,6 +76,21 @@ mixin _$CounterStore on _CounterStoreBase, Store {
     });
   }
 
+  final _$previousMinuteAtom = Atom(name: '_CounterStoreBase.previousMinute');
+
+  @override
+  String get previousMinute {
+    _$previousMinuteAtom.reportRead();
+    return super.previousMinute;
+  }
+
+  @override
+  set previousMinute(String value) {
+    _$previousMinuteAtom.reportWrite(value, super.previousMinute, () {
+      super.previousMinute = value;
+    });
+  }
+
   final _$decrementAsyncAction = AsyncAction('_CounterStoreBase.decrement');
 
   @override
@@ -127,12 +135,23 @@ mixin _$CounterStore on _CounterStoreBase, Store {
   }
 
   @override
+  dynamic stopCounter() {
+    final _$actionInfo = _$_CounterStoreBaseActionController.startAction(
+        name: '_CounterStoreBase.stopCounter');
+    try {
+      return super.stopCounter();
+    } finally {
+      _$_CounterStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 formCounter: ${formCounter},
+previousMinute: ${previousMinute},
 minute: ${minute},
 second: ${second},
-previousMinute: ${previousMinute},
 previousSecond: ${previousSecond}
     ''';
   }
