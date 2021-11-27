@@ -94,6 +94,10 @@ class _HomePageState extends State<HomePage>
                     name: 'Modal test',
                     route: '/outlet/',
                   ),
+                  ChallengeItemWidget(
+                    name: 'Custom paints',
+                    route: '/paint/',
+                  ),
                 ],
               ),
             ),

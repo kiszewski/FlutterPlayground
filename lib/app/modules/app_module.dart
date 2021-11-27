@@ -8,6 +8,7 @@ import 'gpl_consumer/gpl_client.dart';
 import 'home/home_page.dart';
 import 'clock_timer/controller/counter_store.dart';
 import 'outlet/outlet_module.dart';
+import 'paint/custom_paints_module.dart';
 
 class AppModule extends Module {
   @override
@@ -40,6 +41,10 @@ class AppModule extends Module {
             ModuleRoute(
               '/outlet',
               module: OutletModule(),
+            ),
+            ModuleRoute(
+              '/paint',
+              module: CustomPaintsModule(),
             ),
           ],
         ),
