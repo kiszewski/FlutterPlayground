@@ -71,34 +71,36 @@ class _HomePageState extends State<HomePage>
             padding: EdgeInsets.symmetric(vertical: height / 3, horizontal: 15),
             child: Container(
               width: width * .03,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ChallengeItemWidget(
-                    name: 'Timer Challenge',
-                    route: '/clock_timer/',
-                  ),
-                  ChallengeItemWidget(
-                    name: 'Repositórios Github',
-                    route: '/repositories_page',
-                  ),
-                  ChallengeItemWidget(
-                    name: 'Container Azul',
-                    route: '/blue_page',
-                  ),
-                  ChallengeItemWidget(
-                    name: 'Arguments Test',
-                    route: '/arguments/',
-                  ),
-                  ChallengeItemWidget(
-                    name: 'Modal test',
-                    route: '/outlet/',
-                  ),
-                  ChallengeItemWidget(
-                    name: 'Custom paints',
-                    route: '/paint/',
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ChallengeItemWidget(
+                      name: 'Timer Challenge',
+                      route: '/clock_timer/',
+                    ),
+                    ChallengeItemWidget(
+                      name: 'Repositórios Github',
+                      route: '/repositories_page',
+                    ),
+                    ChallengeItemWidget(
+                      name: 'Container Azul',
+                      route: '/blue_page',
+                    ),
+                    ChallengeItemWidget(
+                      name: 'Arguments Test',
+                      route: '/arguments/',
+                    ),
+                    ChallengeItemWidget(
+                      name: 'Modal test',
+                      route: '/outlet/',
+                    ),
+                    ChallengeItemWidget(
+                      name: 'Custom paints',
+                      route: '/paint/',
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
