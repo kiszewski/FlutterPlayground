@@ -15,12 +15,15 @@ class _GithubRepositoriesPageState extends State<GithubRepositoriesPage> {
   @override
   Widget build(BuildContext context) {
     GplClient client = Modular.get();
-    return FutureBuilder(
-        future: client.getRepositories(),
-        builder: (context, snapshot) {
-          return Container(
-            child: Text('snapshot.data.toString()'),
-          );
-        });
+    return Container(
+      width: MediaQuery.of(context).size.width * .9,
+      child: FutureBuilder(
+          future: client.getRepositories(),
+          builder: (context, snapshot) {
+            return Container(
+              child: Text('snapshot.data.toString()'),
+            );
+          }),
+    );
   }
 }

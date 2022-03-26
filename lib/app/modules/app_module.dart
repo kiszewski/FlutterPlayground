@@ -1,4 +1,5 @@
 import 'package:challenges_app/app/modules/clock_timer/clock_module.dart';
+import 'package:challenges_app/app/modules/dragger/dragger_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -30,6 +31,10 @@ class AppModule extends Module {
                 child: (_, __) => Material(
                       child: GithubRepositoriesPage(),
                     )),
+            ModuleRoute(
+              '/dragger',
+              module: DraggerModule(),
+            ),
             ModuleRoute(
               '/clock_timer',
               module: ClockModule(),

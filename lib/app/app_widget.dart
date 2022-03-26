@@ -7,7 +7,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/clock_timer/',
+      initialRoute: '/dragger/',
     ).modular();
   }
 }
