@@ -8,11 +8,10 @@ import 'pages/second_page.dart';
 class ArgumentsModule extends Module {
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (_, __) => FirstPage()),
-        ChildRoute('/second',
-            child: (_, args) => SecondPage(
-                  data: args.data,
-                ),
-            guards: [ArgumentsGuard<ParamData>(redirectTo: '/arguments/')]),
+        ChildRoute('/', child: (_, __) => FirstPage(), children: [
+          ChildRoute('/second/',
+              child: (_, args) => SecondPage(data: args.data),
+              guards: [ArgumentsGuard<ParamData>(redirectTo: '/arguments/')]),
+        ]),
       ];
 }

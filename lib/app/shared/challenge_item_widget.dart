@@ -20,7 +20,7 @@ class ChallengeItemWidget extends StatelessWidget {
         padding: MaterialStateProperty.all(EdgeInsets.all(10)),
       ),
       onPressed: () {
-        Modular.to.navigate(route);
+        Modular.to.pushNamed(route);
       },
       child: Text(
         name,

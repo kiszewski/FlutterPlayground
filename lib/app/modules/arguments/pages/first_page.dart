@@ -10,8 +10,8 @@ class FirstPage extends StatelessWidget {
     return Container(
       child: TextButton(
         onPressed: () {
-          Modular.to
-              .navigate('./second', arguments: ParamData(text: 'ola 123'));
+          Modular.to.pushNamed('/arguments/second/',
+              arguments: ParamData(text: 'ola 123'));
         },
         child: Text('Ir pra proxima pagina com parametros'),
       ),
