@@ -5,5 +5,7 @@ import 'app/app_widget.dart';
 import 'app/modules/app_module.dart';
 
 void main() {
+  throw Exception('Test to revert pull request');
+
   runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
