@@ -61,18 +61,18 @@ mixin _$CounterStore on _CounterStoreBase, Store {
     });
   }
 
-  final _$formCounterAtom = Atom(name: '_CounterStoreBase.formCounter');
+  final _$isDecreasingAtom = Atom(name: '_CounterStoreBase.isDecreasing');
 
   @override
-  String get formCounter {
-    _$formCounterAtom.reportRead();
-    return super.formCounter;
+  bool get isDecreasing {
+    _$isDecreasingAtom.reportRead();
+    return super.isDecreasing;
   }
 
   @override
-  set formCounter(String value) {
-    _$formCounterAtom.reportWrite(value, super.formCounter, () {
-      super.formCounter = value;
+  set isDecreasing(bool value) {
+    _$isDecreasingAtom.reportWrite(value, super.isDecreasing, () {
+      super.isDecreasing = value;
     });
   }
 
@@ -124,17 +124,6 @@ mixin _$CounterStore on _CounterStoreBase, Store {
   }
 
   @override
-  dynamic setFormCounter(String value) {
-    final _$actionInfo = _$_CounterStoreBaseActionController.startAction(
-        name: '_CounterStoreBase.setFormCounter');
-    try {
-      return super.setFormCounter(value);
-    } finally {
-      _$_CounterStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic stopCounter() {
     final _$actionInfo = _$_CounterStoreBaseActionController.startAction(
         name: '_CounterStoreBase.stopCounter');
@@ -148,7 +137,7 @@ mixin _$CounterStore on _CounterStoreBase, Store {
   @override
   String toString() {
     return '''
-formCounter: ${formCounter},
+isDecreasing: ${isDecreasing},
 previousMinute: ${previousMinute},
 minute: ${minute},
 second: ${second},

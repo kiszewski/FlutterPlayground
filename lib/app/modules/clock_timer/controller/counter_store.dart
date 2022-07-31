@@ -16,41 +16,36 @@ abstract class _CounterStoreBase with Store {
   @action
   setSeconds(int value) => _seconds = value;
 
+  Timer _timer = Timer.periodic(Duration(seconds: 0), (_) {})..cancel();
+
   @observable
-  String formCounter = '';
-  @action
-  setFormCounter(String value) => formCounter = value;
-
-  Timer _timer = Timer.periodic(Duration(seconds: 0), (_) {
-    print('vazio');
-  })
-    ..cancel();
-
-  bool get isDecreasing => _timer.isActive;
+  bool isDecreasing = false;
 
   @action
   Future decrement() async {
+    isDecreasing = true;
     _timer = Timer.periodic(Duration(seconds: 1), (_timer) {
       if (_minutes > 9) {
         previousMinute = _minutes.toString();
       } else {
         previousMinute = '0$_minutes';
       }
-      if (_seconds == 0) {
+      if (_seconds <= 0) {
         setSeconds(59);
         if (_minutes != 0) {
-          if (_minutes > 9) {
-            previousMinute = _minutes.toString();
-          } else {
-            previousMinute = '0$_minutes';
-          }
           setMinutes(_minutes - 1);
         } else {
+          isDecreasing = false;
+
           _timer.cancel();
         }
+      } else {
+        setSeconds(_seconds - 1);
       }
 
-      setSeconds(_seconds - 1);
+      // print('TIMEs: $_minutes : $_seconds');
+      // print('TIME: $minute : $second');
+      // print('PREVIOUS TIME: $previousMinute : $previousSecond');
     });
   }
 
@@ -65,6 +60,10 @@ abstract class _CounterStoreBase with Store {
 
   @computed
   String get second {
+    if (_seconds < 0) {
+      return '00';
+    }
+
     if (_seconds > 9) {
       return _seconds.toString();
     } else {
@@ -79,7 +78,9 @@ abstract class _CounterStoreBase with Store {
   String get previousSecond {
     final int previousSec = _seconds + 1;
 
-    if (previousSec + 1 > 9) {
+    if (previousSec == 60) return '00';
+
+    if (previousSec > 9) {
       return previousSec.toString();
     } else {
       return '0$previousSec';
@@ -88,6 +89,8 @@ abstract class _CounterStoreBase with Store {
 
   @action
   stopCounter() {
+    isDecreasing = false;
+
     _timer.cancel();
     _seconds = 0;
     _minutes = 0;

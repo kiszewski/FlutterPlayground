@@ -21,7 +21,6 @@ class _CounterPageState extends State<CounterPage> {
   @override
   void initState() {
     store = Modular.get();
-    store.decrement();
     super.initState();
   }
 
@@ -52,54 +51,48 @@ class _CounterPageState extends State<CounterPage> {
             ],
           ),
         ),
-        Column(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * .2),
-              child: TextField(
-                inputFormatters: [],
-                controller: minutesInput,
-                keyboardType: TextInputType.number,
-                maxLength: 2,
-                decoration: InputDecoration(hintText: '00'),
-                // onChanged: store.setFormCounter,
+        Container(
+          padding: EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  inputFormatters: [],
+                  controller: minutesInput,
+                  keyboardType: TextInputType.number,
+                  maxLength: 2,
+                  decoration: InputDecoration(hintText: '00'),
+                  // onChanged: store.setFormCounter,
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * .2),
-              child: TextField(
-                controller: secondsInput,
-                inputFormatters: [],
-                keyboardType: TextInputType.number,
-                maxLength: 2,
-                decoration: InputDecoration(hintText: '00'),
-                // onChanged: store.setFormCounter,
+              SizedBox(width: 16),
+              Expanded(
+                child: TextField(
+                  controller: secondsInput,
+                  inputFormatters: [],
+                  keyboardType: TextInputType.number,
+                  maxLength: 2,
+                  decoration: InputDecoration(hintText: '00'),
+                  // onChanged: store.setFormCounter,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        store.isDecreasing
-            ? TextButton(
-                onPressed: () {
-                  store.stopCounter();
-                },
-                child: Text('Stop'))
-            : TextButton(
-                onPressed: () {
-                  store.setMinutes(int.parse(minutesInput.text));
-                  store.setSeconds(int.parse(secondsInput.text));
-                  store.decrement();
-                },
-                child: Text('Decrement')),
         Observer(builder: (_) {
-          store.second;
-          return TextButton(
-              onPressed: () {
-                Modular.to.pushNamed('./green');
-              },
-              child: Text('Go to green screen'));
+          return store.isDecreasing
+              ? TextButton(
+                  onPressed: store.stopCounter,
+                  child: Text('Stop'),
+                )
+              : TextButton(
+                  onPressed: () {
+                    store.setMinutes(int.parse(minutesInput.text));
+                    store.setSeconds(int.parse(secondsInput.text));
+                    store.decrement();
+                  },
+                  child: Text('Decrement'),
+                );
         })
       ],
     );
